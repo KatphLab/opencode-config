@@ -1,0 +1,82 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "server": {
+    "cors": [
+      "{env:OPENCODE_DOMAIN}"
+    ]
+  },
+  "plugin": [
+    "superpowers@git+https://github.com/obra/superpowers.git"
+  ],
+  "permission": {
+    "*": "deny",
+    "read": "allow",
+    "grep": "allow",
+    "glob": "allow",
+    "todowrite": "allow",
+    "todoread": "allow",
+    "skill": "allow",
+    "logbook_*": "allow"
+  },
+  "agent": {
+    // default agents
+    "build": {
+      "permission": {
+        "bash": "allow",
+        "apply_patch": "allow",
+        "edit": "allow",
+        "write": "allow"
+      }
+    },
+    "plan": {
+      "permission": {
+        "markdown_*": "allow",
+        "webfetch": "allow",
+        "websearch": "allow"
+      }
+    },
+    // high complex agents
+    "creation-orchestrator": {
+      "model": "openai/gpt-5.4"
+    },
+    "feature-lead": {
+      "model": "openai/gpt-5.4"
+    },
+    "debug-lead": {
+      "model": "openai/gpt-5.4"
+    },
+    // medium complex agents
+    "reviewer": {
+      "model": "deepseek/deepseek-reasoner"
+    },
+    "feature-manager": {
+      "model": "openai/gpt-5.3-codex"
+    },
+    "discovery": {
+      "model": "deepseek/deepseek-reasoner"
+    },
+    "quick-lead": {
+      "model": "minimax/MiniMax-M2.7"
+    },
+    // low complex agents
+    "builder": {
+      "model": "minimax/MiniMax-M2.7"
+    },
+  },
+  "mcp": {
+    "stitch": {
+      "type": "remote",
+      "url": "https://stitch.googleapis.com/mcp",
+      "headers": {
+        "X-Goog-Api-Key": "{env:STITCH_API_KEY}"
+      },
+      "timeout": 1200000,
+      "enabled": false
+    },
+    "notion": {
+      "type": "remote",
+      "url": "https://mcp.notion.com/mcp",
+      "enabled": false
+    }
+  }
+}
