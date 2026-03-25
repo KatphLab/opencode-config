@@ -35,6 +35,8 @@ This repository provides an enhanced OpenCode configuration with specialized ski
   - `OPENCODE_DOMAIN`: For CORS configuration
   - `OPENCODE_TELEGRAM_BOT_TOKEN`: For Telegram notifications (get from BotFather)
   - `OPENCODE_TELEGRAM_CHAT_ID`: For Telegram notifications (your chat ID)
+  - `SONARQUBE_TOKEN`: For SonarQube MCP server integration
+  - `SONARQUBE_URL`: For SonarQube MCP server integration
 
 ## Installation & Setup
 
@@ -59,11 +61,13 @@ This configuration is designed for the OpenCode configuration directory (`~/.con
 3. **Configure environment variables** (optional):
 
    ```bash
-   # Add to your shell profile (~/.bashrc, ~/.zshrc, etc.)
-   export STITCH_API_KEY="your-stitch-api-key"
-   export OPENCODE_DOMAIN="your-opencode-domain"
-   export OPENCODE_TELEGRAM_BOT_TOKEN="your-bot-token-from-botfather"
-   export OPENCODE_TELEGRAM_CHAT_ID="your-chat-id"
+    # Add to your shell profile (~/.bashrc, ~/.zshrc, etc.)
+    export STITCH_API_KEY="your-stitch-api-key"
+    export OPENCODE_DOMAIN="your-opencode-domain"
+    export OPENCODE_TELEGRAM_BOT_TOKEN="your-bot-token-from-botfather"
+    export OPENCODE_TELEGRAM_CHAT_ID="your-chat-id"
+    export SONARQUBE_TOKEN="your-sonarqube-token"
+    export SONARQUBE_URL="https://your-sonarqube-instance.com"
    ```
 
 4. **Verify configuration**:
@@ -119,7 +123,7 @@ This configuration uses a multi-tier agent system with different models assigned
 
 | Agent               | Purpose                                                    | Model                      | When Invoked                            |
 | ------------------- | ---------------------------------------------------------- | -------------------------- | --------------------------------------- |
-| **reviewer**        | Reviews code, specs, and plans for quality and correctness | deepseek/deepseek-reasoner | Code review, spec review, plan review   |
+| **reviewer**        | Reviews code, specs, and plans for quality and correctness | minimax/MiniMax-M2.7       | Code review, spec review, plan review   |
 | **feature-manager** | Manages feature implementation tasks and coordination      | openai/gpt-5.3-codex       | Feature task management                 |
 | **discovery**       | Explores codebases and gathers context for tasks           | deepseek/deepseek-reasoner | Codebase exploration, context gathering |
 | **quick-lead**      | Leads quick execution tasks and simple implementations     | minimax/MiniMax-M2.7       | Quick tasks, simple implementations     |
@@ -128,7 +132,7 @@ This configuration uses a multi-tier agent system with different models assigned
 
 | Agent       | Purpose                                  | Model                | When Invoked                        |
 | ----------- | ---------------------------------------- | -------------------- | ----------------------------------- |
-| **builder** | Executes implementation tasks from plans | minimax/MiniMax-M2.7 | Plan execution, code implementation |
+| **builder** | Executes implementation tasks from plans | openai/gpt-5.4-mini  | Plan execution, code implementation |
 
 ### Agent Dispatch Pattern
 
@@ -192,11 +196,22 @@ The main configuration file (`opencode.json`) includes:
     "glob": "allow",
     "todowrite": "allow",
     "todoread": "allow",
-    "skill": "allow",
-    "logbook_*": "allow"
+    "skill": "allow"
   },
   "agent": {
     // Agent definitions with model assignments
+    "build": {
+      "model": "deepseek/deepseek-chat"
+    },
+    "plan": {
+      "model": "deepseek/deepseek-chat"
+    },
+    "builder": {
+      "model": "openai/gpt-5.4-mini",
+      "options": {
+        "reasoningEffort": "high"
+      }
+    }
   },
   "mcp": {
     "stitch": {
@@ -212,6 +227,26 @@ The main configuration file (`opencode.json`) includes:
       "type": "remote",
       "url": "https://mcp.notion.com/mcp",
       "enabled": false
+    },
+    "sonarqube": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "-i",
+        "-e",
+        "SONARQUBE_TOKEN",
+        "-e",
+        "SONARQUBE_URL",
+        "mcp/sonarqube"
+      ],
+      "environment": {
+        "SONARQUBE_TOKEN": "{env:SONARQUBE_TOKEN}",
+        "SONARQUBE_URL": "{env:SONARQUBE_URL}"
+      },
+      "enabled": false,
+      "timeout": 60000
     }
   }
 }
@@ -221,7 +256,7 @@ The main configuration file (`opencode.json`) includes:
 
 The configuration uses a deny-by-default permission model:
 
-- **Base permissions**: read, grep, glob, todowrite, todoread, skill, logbook operations
+- **Base permissions**: read, grep, glob, todowrite, todoread, skill
 - **Agent-specific permissions**: Additional tools granted per agent type
 - **Security**: Explicit allow listing prevents unauthorized tool access
 
@@ -229,8 +264,9 @@ The configuration uses a deny-by-default permission model:
 
 - **Stitch**: Design automation server (requires API key)
 - **Notion**: Notion integration (disabled by default)
+- **SonarQube**: Code quality and security analysis server (requires Docker, SONARQUBE_TOKEN, and SONARQUBE_URL environment variables)
 
-Both MCP servers are configurable and can be enabled as needed.
+All MCP servers are configurable and can be enabled as needed.
 
 ### Plugin System
 
@@ -378,6 +414,15 @@ feature "add user profile page"
 2. Enable Stitch in `opencode.json`: `"enabled": true`
 3. Check network connectivity
 
+#### Issue: SonarQube MCP server not connecting
+
+**Solution**:
+
+1. Set `SONARQUBE_TOKEN` and `SONARQUBE_URL` environment variables
+2. Enable SonarQube in `opencode.json`: `"enabled": true`
+3. Ensure Docker is installed and running
+4. Check Docker can pull the `mcp/sonarqube` image
+
 #### Issue: Superpowers plugin not loading
 
 **Solution**:
@@ -410,6 +455,10 @@ feature "add user profile page"
 
 **A**: Set `"enabled": true` in the Notion MCP configuration in `opencode.json`.
 
+#### Q: How do I enable SonarQube integration?
+
+**A**: Set `"enabled": true` in the SonarQube MCP configuration in `opencode.json` and ensure `SONARQUBE_TOKEN` and `SONARQUBE_URL` environment variables are set.
+
 #### Q: Can I customize the permission system?
 
 **A**: Yes, edit the `permission` section in `opencode.json`. Use deny-by-default for security.
@@ -421,7 +470,7 @@ feature "add user profile page"
 ### Debugging Tips
 
 1. **Check logs**: OpenCode provides session logs for debugging
-2. **Verify environment variables**: `echo $STITCH_API_KEY`
+2. **Verify environment variables**: `echo $STITCH_API_KEY`, `echo $SONARQUBE_TOKEN`, `echo $SONARQUBE_URL`
 3. **Test permissions**: Try simple commands first
 4. **Isolate issues**: Disable plugins/MCP servers to identify problems
 5. **Review agent assignments**: Check which agent is handling your task

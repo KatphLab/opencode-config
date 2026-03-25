@@ -16,11 +16,11 @@
     "todowrite": "allow",
     "todoread": "allow",
     "skill": "allow",
-    "logbook_*": "allow"
   },
   "agent": {
     // default agents
     "build": {
+      "model": "deepseek/deepseek-chat",
       "permission": {
         "bash": "allow",
         "apply_patch": "allow",
@@ -29,6 +29,7 @@
       }
     },
     "plan": {
+      "model": "deepseek/deepseek-chat",
       "permission": {
         "markdown_*": "allow",
         "webfetch": "allow",
@@ -47,7 +48,7 @@
     },
     // medium complex agents
     "reviewer": {
-      "model": "deepseek/deepseek-reasoner"
+      "model": "minimax/MiniMax-M2.7"
     },
     "feature-manager": {
       "model": "openai/gpt-5.3-codex"
@@ -60,7 +61,10 @@
     },
     // low complex agents
     "builder": {
-      "model": "minimax/MiniMax-M2.7"
+      "model": "openai/gpt-5.4-mini",
+      "options": {
+        "reasoningEffort": "high"
+      }
     },
   },
   "mcp": {
@@ -77,6 +81,26 @@
       "type": "remote",
       "url": "https://mcp.notion.com/mcp",
       "enabled": false
+    },
+    "sonarqube": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "-i",
+        "-e",
+        "SONARQUBE_TOKEN",
+        "-e",
+        "SONARQUBE_URL",
+        "mcp/sonarqube"
+      ],
+      "environment": {
+        "SONARQUBE_TOKEN": "{env:SONARQUBE_TOKEN}",
+        "SONARQUBE_URL": "{env:SONARQUBE_URL}"
+      },
+      "enabled": false,
+      "timeout": 60000
     }
   }
 }
