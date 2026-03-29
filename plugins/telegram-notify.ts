@@ -17,15 +17,23 @@ const log = (client: any, msg: string, data?: any, level: 'debug' | 'error' = 'd
 };
 
 export default async function TelegramNotifyPlugin({ project, client, directory, worktree }: any) {
+  const BOT_TOKEN = process.env.OPENCODE_TELEGRAM_BOT_TOKEN;
+  const CHAT_ID = process.env.OPENCODE_TELEGRAM_CHAT_ID;
+  const ENABLED = process.env.OPENCODE_TELEGRAM_NOTIFY_ENABLED !== 'false';
+
   log(client, 'Plugin loaded', {
     project,
     directory,
     worktree,
     hasClient: !!client,
+    enabled: ENABLED,
+    hasBotToken: !!BOT_TOKEN,
+    hasChatId: !!CHAT_ID,
   });
 
-  const BOT_TOKEN = process.env.OPENCODE_TELEGRAM_BOT_TOKEN;
-  const CHAT_ID = process.env.OPENCODE_TELEGRAM_CHAT_ID;
+  if (!ENABLED) {
+    log(client, 'Telegram notify plugin is disabled via OPENCODE_TELEGRAM_NOTIFY_ENABLED env var');
+  }
 
   return {
     event: async ({ event }: any) => {
@@ -35,6 +43,11 @@ export default async function TelegramNotifyPlugin({ project, client, directory,
       });
 
       if (event?.type !== 'session.idle') return;
+      
+      if (!ENABLED) {
+        log(client, 'Plugin disabled via OPENCODE_TELEGRAM_NOTIFY_ENABLED env var');
+        return;
+      }
 
       try {
         if (!BOT_TOKEN || !CHAT_ID) {

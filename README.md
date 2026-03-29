@@ -35,6 +35,7 @@ This repository provides an enhanced OpenCode configuration with specialized ski
   - `OPENCODE_DOMAIN`: For CORS configuration
   - `OPENCODE_TELEGRAM_BOT_TOKEN`: For Telegram notifications (get from BotFather)
   - `OPENCODE_TELEGRAM_CHAT_ID`: For Telegram notifications (your chat ID)
+  - `OPENCODE_TELEGRAM_NOTIFY_ENABLED`: Set to `false` to disable Telegram notifications without removing config
   - `SONARQUBE_TOKEN`: For SonarQube MCP server integration
   - `SONARQUBE_URL`: For SonarQube MCP server integration
 
@@ -66,6 +67,7 @@ This configuration is designed for the OpenCode configuration directory (`~/.con
     export OPENCODE_DOMAIN="your-opencode-domain"
     export OPENCODE_TELEGRAM_BOT_TOKEN="your-bot-token-from-botfather"
     export OPENCODE_TELEGRAM_CHAT_ID="your-chat-id"
+    export OPENCODE_TELEGRAM_NOTIFY_ENABLED="true"  # Set to "false" to disable
     export SONARQUBE_TOKEN="your-sonarqube-token"
     export SONARQUBE_URL="https://your-sonarqube-instance.com"
    ```
@@ -363,11 +365,26 @@ The `telegram-notify.ts` plugin sends Telegram notifications when OpenCode sessi
    ```bash
    export OPENCODE_TELEGRAM_BOT_TOKEN="your-bot-token-from-botfather"
    export OPENCODE_TELEGRAM_CHAT_ID="your-chat-id"
+   export OPENCODE_TELEGRAM_NOTIFY_ENABLED="true"  # Optional, defaults to "true"
    ```
+
+   | Variable | Description | Required |
+   |----------|-------------|----------|
+   | `OPENCODE_TELEGRAM_BOT_TOKEN` | Bot token from @BotFather | Yes |
+   | `OPENCODE_TELEGRAM_CHAT_ID` | Your Telegram chat ID (get from @userinfobot) | Yes |
+   | `OPENCODE_TELEGRAM_NOTIFY_ENABLED` | Set to `"false"` to disable without removing config | No (defaults to `true`) |
 
 2. **Plugin Location:** `plugins/telegram-notify.ts`
 
-3. **Message Format:**
+3. **Setup Steps:**
+
+   - **Get Bot Token**: Message @BotFather on Telegram and create a new bot
+   - **Get Chat ID**: Message @userinfobot on Telegram to get your chat ID
+   - **Add Bot to Chat**: Add the bot to your chat/channel (for groups, make it an admin)
+   - **Set Environment Variables**: Add the variables to your shell profile
+   - **Test**: Run an OpenCode session and wait for it to complete (session goes idle)
+
+4. **Message Format:**
 
    ```
    ✅ OpenCode Finished
@@ -393,8 +410,10 @@ The `telegram-notify.ts` plugin sends Telegram notifications when OpenCode sessi
 **Error Handling:**
 
 - Logs errors to `/tmp/opencode-telegram-notify-error.log`
-- Requires both environment variables to be set
+- Requires both `OPENCODE_TELEGRAM_BOT_TOKEN` and `OPENCODE_TELEGRAM_CHAT_ID` to be set
+- Can be disabled by setting `OPENCODE_TELEGRAM_NOTIFY_ENABLED=false` without removing configuration
 - Gracefully handles missing data or API failures
+- Filters out notifications from subagents (builder, reviewer) to reduce noise
 
 ## Usage Examples
 
@@ -549,6 +568,7 @@ debug "login API returning 500 error"
 3. Verify chat ID is correct (use @userinfobot on Telegram)
 4. Check error logs: `/tmp/opencode-telegram-notify-error.log`
 5. Ensure bot is added to the chat/channel
+6. Check `OPENCODE_TELEGRAM_NOTIFY_ENABLED` is not set to `false` (plugin is enabled by default)
 
 ### Frequently Asked Questions
 
