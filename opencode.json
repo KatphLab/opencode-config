@@ -17,6 +17,14 @@
         "websearch": "allow"
       }
     },
+    "project-manager": {
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo",
+      "options": {},
+      "permission": {},
+      "tools": {
+        "linear_*": true
+      }
+    },
     "build": {
       "options": {},
       "permission": {
@@ -88,7 +96,12 @@
       },
       "enabled": false,
       "timeout": 60000
-    }
+    },
+    "linear": {
+      "type": "remote",
+      "url": "https://mcp.linear.app/mcp",
+      "enabled": true
+    },
   },
   "permission": {
     "*": "deny",
