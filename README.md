@@ -20,7 +20,7 @@ This repository provides an enhanced OpenCode configuration with specialized ski
 
 ## Features
 
-- **17+ Specialized Skills**: From React development to Stitch design automation
+- **9 Specialized Skills**: Agent management, PRD generation, Linear CLI integration, and more
 - **Multi-tier Agent System**: High/medium/low complexity agents with appropriate model assignments
 - **Custom Commands**: Streamlined workflows for common tasks
 - **Superpowers Integration**: Enhanced capabilities through the superpowers plugin
@@ -92,23 +92,15 @@ OpenCode skills are specialized workflows that activate automatically based on t
 
 | Skill | Description | When to Use | Examples |
 |-------|-------------|-------------|----------|
-| **sonar-quality-gate-check** | Analyze SonarQube quality gates, issues, coverage, and security hotspots | When reviewing SonarQube quality reports or preparing for merge | `@sonar-quality-gate-check analyze` |
 | **find-skills** | Discover and install agent skills from the open skills ecosystem | When looking for specialized functionality or asking "how do I do X" | `@find-skills search "testing"` |
 | **prd** | Generate high-quality Product Requirements Documents | When starting new products, planning features, or defining requirements | `@prd create "user authentication system"` |
-| **frontend-design** | Create distinctive, production-grade frontend interfaces | When building web components, pages, or applications with high design quality | `@frontend-design create landing page` |
 | **grill-me** | Interview the user relentlessly about plans or designs | When stress-testing a plan, getting grilled on design, or mentions "grill me" | `@grill-me about this architecture` |
-| **langgraph-docs** | Fetch and reference LangGraph Python documentation | When building stateful agents, multi-agent workflows, or LangGraph implementations | `@langgraph-docs about human-in-the-loop` |
-| **design-md** | Analyze Stitch projects and synthesize semantic design systems into DESIGN.md files | When working with Stitch designs that need design system documentation | `@design-md analyze project.stitch` |
-| **shadcn** | Manage shadcn components and projects — adding, searching, fixing, debugging, styling, and composing UI | When working with shadcn/ui, component registries, or projects with components.json | `@shadcn add button`, `@shadcn init` |
 | **agent-browser** | Browser automation CLI for AI agents | When needing to interact with websites, fill forms, click buttons, take screenshots, or scrape data | `@agent-browser open https://example.com`, `@agent-browser fill form` |
-| **stitch-design** | Unified entry point for Stitch design work | When doing UI/UX design work with Stitch, needs prompt enhancement or design system synthesis | `@stitch-design create dashboard` |
 | **skill-creator** | Create or update reusable OpenCode skills | When creating new skills or editing existing skills for any project | `@skill-creator create new-skill` |
-| **react-components** | Convert Stitch designs into modular Vite and React components | When converting Stitch designs to React components with AST-based validation | `@react-components convert design.stitch` |
 | **agent-creator** | Create or update OpenCode agents | When creating new agents or editing existing agents for any project | `@agent-creator create new-agent` |
-| **stitch-loop** | Iteratively build websites using Stitch with autonomous baton-passing | When building websites iteratively with Stitch using loop patterns | `@stitch-loop build portfolio-site` |
-| **enhance-prompt** | Transform vague UI ideas into polished, Stitch-optimized prompts | When needing to enhance UI prompts with specificity and design system context | `@enhance-prompt "create login page"` |
 | **command-creator** | Create or update reusable OpenCode commands | When creating new commands or editing existing commands | `@command-creator create new-command` |
-| **react-ts-frontend** | Modern React stack: React 19, TypeScript, Tailwind CSS, Vite, TanStack Query | When building React apps, components, state management, or UI | `@react-ts-frontend create component`, `@react-ts-frontend setup project` |
+| **linear-cli** | Manage Linear issues from the command line | When automating Linear issue/team/project management via CLI | `@linear-cli issue create` |
+| **caveman** | Ultra-compressed communication mode | When requesting brief, terse responses; token efficiency mode | `@caveman` or say "caveman mode" |
 
 ### Skill Activation
 
@@ -163,6 +155,8 @@ Custom commands provide streamlined workflows through lane-based execution patte
 | **create-skill** | Create new skill definitions | `create-skill <skill-name>` | Interactive skill creation via creation-orchestrator |
 | **create-command** | Create new command definitions | `create-command <command-name>` | Interactive command creation via creation-orchestrator |
 | **design-opencode** | Design OpenCode configurations | `design-opencode <requirement>` | Design agents, commands, or skills setup |
+| **optimize-prompt** | Rewrite prompts to be shorter, clearer | `optimize-prompt <prompt>` | Optimizes prompts for role clarity, end-goal clarity, process clarity |
+| **pr-review** | PR Explainer - explains PR impact | `pr-review <pr-reference>` | Explains PR impact top-down as execution/dependency tree |
 
 ### Lane Workflows
 
