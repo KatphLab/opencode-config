@@ -1,12 +1,10 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "server": {
-    "cors": [
-      "{env:OPENCODE_DOMAIN}"
-    ]
+    "cors": ["{env:OPENCODE_DOMAIN}"]
   },
   "plugin": [
-    "superpowers@git+https://github.com/obra/superpowers.git#8ea39819eed74fe2a0338e71789f06b30e953041"
+    "superpowers@git+https://github.com/obra/superpowers.git#f2cbfbefebbfef77321e4c9abc9e949826bea9d7"
   ],
   "agent": {
     "plan": {
@@ -29,7 +27,7 @@
     "general": {
       "options": {},
       "permission": {
-        "bash": "allow",
+        "bash": "allow"
       }
     },
     "orchestrator": {
@@ -94,7 +92,7 @@
       },
       "enabled": false,
       "timeout": 60000
-    },
+    }
   },
   "permission": {
     "*": "deny",
