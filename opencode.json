@@ -36,7 +36,7 @@
       "permission": {}
     },
     "reviewer": {
-      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo",
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p6-turbo",
       "options": {},
       "permission": {}
     },
@@ -46,12 +46,12 @@
       "permission": {}
     },
     "discovery": {
-      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo",
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p6-turbo",
       "options": {},
       "permission": {}
     },
     "builder": {
-      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo",
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p6-turbo",
       "options": {
         "reasoningEffort": "high"
       },
@@ -102,5 +102,19 @@
     "todowrite": "allow",
     "todoread": "allow",
     "skill": "allow"
+  },
+  "disabled_providers": [],
+  "provider": {
+    "fireworks-ai": {
+      "models": {
+        "accounts/fireworks/routers/kimi-k2p6-turbo": {
+          "name": "Kimi K2.6 Turbo",
+          "limit": {
+            "context": 262144,
+            "output": 262144
+          }
+        }
+      }
+    }
   }
 }
