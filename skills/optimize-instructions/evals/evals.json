@@ -1,0 +1,51 @@
+{
+  "skill_name": "optimize-instructions",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Please optimize the copied instruction file in place. Preserve its YAML frontmatter, $ARGUMENTS behavior, and final response requirements. Keep it short but complete.",
+      "expected_output": "An in-place optimized markdown instruction file that preserves frontmatter, placeholders, command behavior, constraints, and final response requirements while removing redundancy.",
+      "files": [
+        "evals/fixtures/slash-command-instructions.md"
+      ],
+      "expectations": [
+        "Preserves YAML frontmatter including description and model metadata",
+        "Preserves the `$ARGUMENTS` placeholder and asks for a target path when arguments are absent",
+        "Preserves in-place editing behavior instead of only giving suggestions",
+        "Preserves the brief final-response requirement",
+        "Output is shorter than the input fixture"
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "Tighten this verbose agent workflow doc without changing its workflow. Keep the safety checks and output format intact, and update the file itself rather than giving me notes.",
+      "expected_output": "A shorter operational workflow document with the same safety checks, decision order, and exact output format preserved.",
+      "files": [
+        "evals/fixtures/agent-workflow.md"
+      ],
+      "expectations": [
+        "Preserves the exact required response headings: Verdict, Missing information, Risks, Recommended changes",
+        "Preserves the missing-plan behavior and does not invent a deployment plan",
+        "Preserves safety checks for production/high-risk deployment changes and asks clarifying questions before approval",
+        "Preserves the boundary that the agent reviews but does not execute deployments",
+        "Output is shorter than the input fixture"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Clean up this skill draft. It rambles and repeats itself, but the trigger conditions, tool requirements, and report template all matter. Edit the markdown in place.",
+      "expected_output": "A concise skill draft preserving trigger conditions, dependencies, and the report template while removing repetitive and vague language.",
+      "files": [
+        "evals/fixtures/skill-draft.md"
+      ],
+      "expectations": [
+        "Preserves YAML frontmatter with name and description metadata",
+        "Preserves all required report sections for the meeting recap",
+        "Preserves the action-item table columns Owner, Action, and Due date",
+        "Preserves anti-hallucination rules for owners, dates, attendees, decisions, and action items",
+        "Preserves tool requirements about reading files and avoiding browser tools unless a URL requires it",
+        "Output is shorter than the input fixture"
+      ]
+    }
+  ]
+}

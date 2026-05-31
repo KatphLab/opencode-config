@@ -1,0 +1,12 @@
+{
+  "eval_id": 0,
+  "eval_name": "slash-command",
+  "prompt": "Please optimize the copied instruction file in place. Preserve its YAML frontmatter, $ARGUMENTS behavior, and final response requirements. Keep it short but complete.",
+  "assertions": [
+    "Preserves YAML frontmatter including description and model metadata",
+    "Preserves the `$ARGUMENTS` placeholder and asks for a target path when arguments are absent",
+    "Preserves in-place editing behavior instead of only giving suggestions",
+    "Preserves the brief final-response requirement",
+    "Output is shorter than the input fixture"
+  ]
+}

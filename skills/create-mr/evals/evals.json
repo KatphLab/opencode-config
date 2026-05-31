@@ -1,0 +1,23 @@
+{
+  "skill_name": "create-mr",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create an MR for the current branch. The repo uses GitLab and its default branch is develop.",
+      "expected_output": "Checks the default branch, compares commits against develop, generates a title and markdown description file, verifies glab is available, creates the MR, deletes the temp file after success, and reports the MR URL.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Open a PR for this GitHub branch. Please base it on the repo default branch and write a useful description from the commits.",
+      "expected_output": "Detects GitHub, finds the default branch before comparing commits, uses gh pr create with a generated title and body file, and removes the temporary markdown file after successful creation.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Create a merge request for my current branch, but I think this project uses main not develop.",
+      "expected_output": "Does not assume develop; determines origin's default branch first, falls back to main/develop only if needed, verifies commits exist, then creates the MR with the detected provider CLI.",
+      "files": []
+    }
+  ]
+}

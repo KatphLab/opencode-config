@@ -1,0 +1,13 @@
+{
+  "eval_id": 2,
+  "eval_name": "skill-draft",
+  "prompt": "Clean up this skill draft. It rambles and repeats itself, but the trigger conditions, tool requirements, and report template all matter. Edit the markdown in place.",
+  "assertions": [
+    "Preserves YAML frontmatter with name and description metadata",
+    "Preserves all required report sections for the meeting recap",
+    "Preserves the action-item table columns Owner, Action, and Due date",
+    "Preserves anti-hallucination rules for owners, dates, attendees, decisions, and action items",
+    "Preserves tool requirements about reading files and avoiding browser tools unless a URL requires it",
+    "Output is shorter than the input fixture"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "expectations": [
+    {
+      "text": "Preserves YAML frontmatter including description and model metadata",
+      "passed": true,
+      "evidence": "Frontmatter contains description/model/openai metadata."
+    },
+    {
+      "text": "Preserves the `$ARGUMENTS` placeholder and asks for a target path when arguments are absent",
+      "passed": true,
+      "evidence": "Found `$ARGUMENTS` plus missing-argument ask behavior."
+    },
+    {
+      "text": "Preserves in-place editing behavior instead of only giving suggestions",
+      "passed": true,
+      "evidence": "Found in-place update behavior and contrast with suggestions/chat-only output."
+    },
+    {
+      "text": "Preserves the brief final-response requirement",
+      "passed": true,
+      "evidence": "Found brief final-response guidance."
+    },
+    {
+      "text": "Output is shorter than the input fixture",
+      "passed": true,
+      "evidence": "Output chars 902 vs input chars 1619."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "total": 5,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {},
+    "total_tool_calls": 0,
+    "total_steps": 0,
+    "errors_encountered": 0,
+    "output_chars": 902,
+    "transcript_chars": 0
+  },
+  "timing": {
+    "total_duration_seconds": 0
+  },
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  }
+}

@@ -1,0 +1,342 @@
+{
+  "metadata": {
+    "skill_name": "optimize-instructions",
+    "skill_path": "/home/katph/.config/opencode/skills/optimize-instructions",
+    "executor_model": "unknown",
+    "timestamp": "2026-05-31T10:06:35.047916+00:00",
+    "evals_run": [
+      0,
+      1,
+      2
+    ],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 0,
+      "eval_name": "slash-command",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 0,
+        "tokens": 1053,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Preserves YAML frontmatter including description and model metadata",
+          "passed": true,
+          "evidence": "Frontmatter contains description/model/openai metadata."
+        },
+        {
+          "text": "Preserves the `$ARGUMENTS` placeholder and asks for a target path when arguments are absent",
+          "passed": true,
+          "evidence": "Found `$ARGUMENTS` plus missing-argument ask behavior."
+        },
+        {
+          "text": "Preserves in-place editing behavior instead of only giving suggestions",
+          "passed": true,
+          "evidence": "Found in-place update behavior and contrast with suggestions/chat-only output."
+        },
+        {
+          "text": "Preserves the brief final-response requirement",
+          "passed": true,
+          "evidence": "Found brief final-response guidance."
+        },
+        {
+          "text": "Output is shorter than the input fixture",
+          "passed": true,
+          "evidence": "Output chars 1053 vs input chars 1619."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "eval_name": "slash-command",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 0,
+        "tokens": 902,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Preserves YAML frontmatter including description and model metadata",
+          "passed": true,
+          "evidence": "Frontmatter contains description/model/openai metadata."
+        },
+        {
+          "text": "Preserves the `$ARGUMENTS` placeholder and asks for a target path when arguments are absent",
+          "passed": true,
+          "evidence": "Found `$ARGUMENTS` plus missing-argument ask behavior."
+        },
+        {
+          "text": "Preserves in-place editing behavior instead of only giving suggestions",
+          "passed": true,
+          "evidence": "Found in-place update behavior and contrast with suggestions/chat-only output."
+        },
+        {
+          "text": "Preserves the brief final-response requirement",
+          "passed": true,
+          "evidence": "Found brief final-response guidance."
+        },
+        {
+          "text": "Output is shorter than the input fixture",
+          "passed": true,
+          "evidence": "Output chars 902 vs input chars 1619."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "agent-workflow",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 0,
+        "tokens": 1165,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Preserves the exact required response headings: Verdict, Missing information, Risks, Recommended changes",
+          "passed": true,
+          "evidence": "All required headings found."
+        },
+        {
+          "text": "Preserves the missing-plan behavior and does not invent a deployment plan",
+          "passed": true,
+          "evidence": "Found ask-for-plan and do-not-invent behavior."
+        },
+        {
+          "text": "Preserves safety checks for production/high-risk deployment changes and asks clarifying questions before approval",
+          "passed": true,
+          "evidence": "Found high-risk deployment checks, clarification, and approval boundary."
+        },
+        {
+          "text": "Preserves the boundary that the agent reviews but does not execute deployments",
+          "passed": true,
+          "evidence": "Found review-only/no-execution boundary."
+        },
+        {
+          "text": "Output is shorter than the input fixture",
+          "passed": true,
+          "evidence": "Output chars 1165 vs input chars 1615."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "agent-workflow",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 0,
+        "tokens": 1137,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Preserves the exact required response headings: Verdict, Missing information, Risks, Recommended changes",
+          "passed": true,
+          "evidence": "All required headings found."
+        },
+        {
+          "text": "Preserves the missing-plan behavior and does not invent a deployment plan",
+          "passed": true,
+          "evidence": "Found ask-for-plan and do-not-invent behavior."
+        },
+        {
+          "text": "Preserves safety checks for production/high-risk deployment changes and asks clarifying questions before approval",
+          "passed": true,
+          "evidence": "Found high-risk deployment checks, clarification, and approval boundary."
+        },
+        {
+          "text": "Preserves the boundary that the agent reviews but does not execute deployments",
+          "passed": true,
+          "evidence": "Found review-only/no-execution boundary."
+        },
+        {
+          "text": "Output is shorter than the input fixture",
+          "passed": true,
+          "evidence": "Output chars 1137 vs input chars 1615."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "skill-draft",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 0,
+        "tokens": 1551,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Preserves YAML frontmatter with name and description metadata",
+          "passed": true,
+          "evidence": "Frontmatter contains name and description metadata."
+        },
+        {
+          "text": "Preserves all required report sections for the meeting recap",
+          "passed": true,
+          "evidence": "All recap sections found."
+        },
+        {
+          "text": "Preserves the action-item table columns Owner, Action, and Due date",
+          "passed": true,
+          "evidence": "Action-item table columns preserved."
+        },
+        {
+          "text": "Preserves anti-hallucination rules for owners, dates, attendees, decisions, and action items",
+          "passed": true,
+          "evidence": "Anti-hallucination, Unassigned, and Not specified rules found."
+        },
+        {
+          "text": "Preserves tool requirements about reading files and avoiding browser tools unless a URL requires it",
+          "passed": true,
+          "evidence": "File-reading and browser/URL limits found."
+        },
+        {
+          "text": "Output is shorter than the input fixture",
+          "passed": true,
+          "evidence": "Output chars 1551 vs input chars 1862."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "skill-draft",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 0,
+        "tokens": 1525,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Preserves YAML frontmatter with name and description metadata",
+          "passed": true,
+          "evidence": "Frontmatter contains name and description metadata."
+        },
+        {
+          "text": "Preserves all required report sections for the meeting recap",
+          "passed": true,
+          "evidence": "All recap sections found."
+        },
+        {
+          "text": "Preserves the action-item table columns Owner, Action, and Due date",
+          "passed": true,
+          "evidence": "Action-item table columns preserved."
+        },
+        {
+          "text": "Preserves anti-hallucination rules for owners, dates, attendees, decisions, and action items",
+          "passed": true,
+          "evidence": "Anti-hallucination, Unassigned, and Not specified rules found."
+        },
+        {
+          "text": "Preserves tool requirements about reading files and avoiding browser tools unless a URL requires it",
+          "passed": true,
+          "evidence": "File-reading and browser/URL limits found."
+        },
+        {
+          "text": "Output is shorter than the input fixture",
+          "passed": true,
+          "evidence": "Output chars 1525 vs input chars 1862."
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 0,
+        "stddev": 0,
+        "min": 0,
+        "max": 0
+      },
+      "tokens": {
+        "mean": 1256.3333,
+        "stddev": 261.261,
+        "min": 1053,
+        "max": 1551
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 0,
+        "stddev": 0,
+        "min": 0,
+        "max": 0
+      },
+      "tokens": {
+        "mean": 1188.0,
+        "stddev": 314.6156,
+        "min": 902,
+        "max": 1525
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.00",
+      "time_seconds": "+0.0",
+      "tokens": "+68"
+    }
+  },
+  "notes": [
+    "All assertions are preservation checks; they verify that optimization did not drop required behavior.",
+    "Timing/token data from subagent notifications was not available in this harness, so benchmark timing is recorded as 0 and token proxy uses output character count.",
+    "Several assertions pass in both configurations, so human review should focus on whether the with-skill outputs are clearer and less overfit than baseline."
+  ]
+}

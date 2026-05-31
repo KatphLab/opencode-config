@@ -1,0 +1,56 @@
+{
+  "expectations": [
+    {
+      "text": "Preserves YAML frontmatter with name and description metadata",
+      "passed": true,
+      "evidence": "Frontmatter contains name and description metadata."
+    },
+    {
+      "text": "Preserves all required report sections for the meeting recap",
+      "passed": true,
+      "evidence": "All recap sections found."
+    },
+    {
+      "text": "Preserves the action-item table columns Owner, Action, and Due date",
+      "passed": true,
+      "evidence": "Action-item table columns preserved."
+    },
+    {
+      "text": "Preserves anti-hallucination rules for owners, dates, attendees, decisions, and action items",
+      "passed": true,
+      "evidence": "Anti-hallucination, Unassigned, and Not specified rules found."
+    },
+    {
+      "text": "Preserves tool requirements about reading files and avoiding browser tools unless a URL requires it",
+      "passed": true,
+      "evidence": "File-reading and browser/URL limits found."
+    },
+    {
+      "text": "Output is shorter than the input fixture",
+      "passed": true,
+      "evidence": "Output chars 1551 vs input chars 1862."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {},
+    "total_tool_calls": 0,
+    "total_steps": 0,
+    "errors_encountered": 0,
+    "output_chars": 1551,
+    "transcript_chars": 0
+  },
+  "timing": {
+    "total_duration_seconds": 0
+  },
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  }
+}
