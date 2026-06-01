@@ -1,0 +1,42 @@
+{
+  "skill_name": "commit-changes",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Please commit my current changes. I may have touched a couple unrelated things, so split them into sensible commits with proper messages if needed.",
+      "expected_output": "Inspects branch and diffs, proposes/uses functional commit grouping, stages only related changes for each commit, writes clear conventional commit messages, runs appropriate checks, and reports commit hashes plus remaining changes.",
+      "files": [],
+      "assertions": [
+        "Creates at least two commits when the working tree contains unrelated functional/documentation changes.",
+        "Commit subjects are specific, non-WIP messages rather than vague messages like updates, misc, or changes.",
+        "The final working tree is clean after committing all intended changes.",
+        "The run records branch, status, log, and a summary in the outputs directory."
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "Commit everything that's ready, but I'm on develop right now. Make sure we don't mess up the shared branch.",
+      "expected_output": "Detects the protected develop branch and stops before staging or committing, warning the user and asking whether to create/switch to a feature branch or explicitly proceed on develop.",
+      "files": [],
+      "assertions": [
+        "Detects that the current branch is develop or otherwise treats it as protected.",
+        "Does not create a new commit on the protected branch without explicit confirmation.",
+        "Leaves the working tree changes uncommitted for user direction.",
+        "The run records branch, status, log, and a summary in the outputs directory."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Can you commit only the auth fix from my working tree? Leave the formatting cleanup and docs edits uncommitted for now.",
+      "expected_output": "Inspects changes, isolates only auth-related files or hunks, leaves unrelated formatting/docs changes unstaged, writes a focused fix-style commit message, and summarizes remaining uncommitted work.",
+      "files": [],
+      "assertions": [
+        "Creates a commit that includes the auth fix.",
+        "Does not include the unrelated docs edit in the commit.",
+        "Does not include the unrelated utility formatting/change in the commit.",
+        "Leaves non-auth changes uncommitted after the auth commit.",
+        "The commit subject is a focused fix-style message about auth."
+      ]
+    }
+  ]
+}

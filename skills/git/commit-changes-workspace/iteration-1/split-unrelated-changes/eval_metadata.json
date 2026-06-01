@@ -1,0 +1,11 @@
+{
+  "eval_id": 0,
+  "eval_name": "split-unrelated-changes",
+  "prompt": "Please commit my current changes. I may have touched a couple unrelated things, so split them into sensible commits with proper messages if needed.",
+  "assertions": [
+    "Creates at least two commits when the working tree contains unrelated functional/documentation changes.",
+    "Commit subjects are specific, non-WIP messages rather than vague messages like updates, misc, or changes.",
+    "The final working tree is clean after committing all intended changes.",
+    "The run records branch, status, log, and a summary in the outputs directory."
+  ]
+}

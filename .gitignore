@@ -1,0 +1,8 @@
+node_modules
+package.json
+bun.lock
+.gitignore
+opencode.json.*
+# Skill workspace directories (eval repos)
+**/*-workspace/**/with_skill/repo/
+**/*-workspace/**/without_skill/repo/

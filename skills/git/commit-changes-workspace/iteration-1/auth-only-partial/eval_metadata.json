@@ -1,0 +1,12 @@
+{
+  "eval_id": 2,
+  "eval_name": "auth-only-partial",
+  "prompt": "Can you commit only the auth fix from my working tree? Leave the formatting cleanup and docs edits uncommitted for now.",
+  "assertions": [
+    "Creates a commit that includes the auth fix.",
+    "Does not include the unrelated docs edit in the commit.",
+    "Does not include the unrelated utility formatting/change in the commit.",
+    "Leaves non-auth changes uncommitted after the auth commit.",
+    "The commit subject is a focused fix-style message about auth."
+  ]
+}
